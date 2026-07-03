@@ -1,0 +1,2 @@
+- profile.jpg  -> your personal photo shown on the homepage
+- experience/<folder>/1.jpg, 2.jpg, ... -> photos for each experience popup
