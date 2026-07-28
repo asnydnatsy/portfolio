@@ -931,50 +931,107 @@
     }
   })();
 
-  // ---------- Reactions ----------
+  // ---------- Reactions (shared count via Firebase Realtime Database) ----------
   (function reactions(){
-    const STORAGE_KEY = 'natasya-site-reactions';
+    // TODO: paste your Firebase Realtime Database URL here, e.g.
+    // "https://natasya-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app"
+    const FIREBASE_URL = "https://natasya-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+    const PICKED_KEY = 'natasya-site-reactions-picked'; // which buttons *this* visitor has tapped (local only)
     const grid = document.getElementById('reactionGrid');
     if (!grid) return;
     const buttons = grid.querySelectorAll('.reaction-btn');
+    const keys = Array.from(buttons).map(b => b.getAttribute('data-key'));
 
-    function loadData(){
+    function loadPicked(){
+      try { return JSON.parse(localStorage.getItem(PICKED_KEY)) || {}; }
+      catch(e) { return {}; }
+    }
+    function savePicked(picked){
+      try { localStorage.setItem(PICKED_KEY, JSON.stringify(picked)); } catch(e){}
+    }
+    let picked = loadPicked();
+
+    function setCount(key, value){
+      const btn = grid.querySelector(`.reaction-btn[data-key="${key}"]`);
+      if (btn) btn.querySelector('.reaction-count').textContent = value;
+    }
+    function setPickedStyle(key){
+      const btn = grid.querySelector(`.reaction-btn[data-key="${key}"]`);
+      if (btn) btn.classList.toggle('picked', !!picked[key]);
+    }
+    buttons.forEach(btn => setPickedStyle(btn.getAttribute('data-key')));
+
+    const usingFirebase = !!FIREBASE_URL;
+
+    // Local-only fallback (used if no Firebase URL is set yet, or a request fails)
+    const LOCAL_FALLBACK_KEY = 'natasya-site-reactions-local';
+    function loadLocal(){
+      try { return JSON.parse(localStorage.getItem(LOCAL_FALLBACK_KEY)) || {}; }
+      catch(e) { return {}; }
+    }
+    function saveLocal(data){
+      try { localStorage.setItem(LOCAL_FALLBACK_KEY, JSON.stringify(data)); } catch(e){}
+    }
+
+    async function fetchCount(key){
+      if (!usingFirebase) return (loadLocal()[key] || 0);
       try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        const res = await fetch(`${FIREBASE_URL}/reactions/${key}.json`);
+        const val = await res.json();
+        return typeof val === 'number' ? val : 0;
       } catch(e) {
-        return {};
+        return (loadLocal()[key] || 0);
       }
     }
-    function saveData(data){
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e){}
+
+    async function writeCount(key, value){
+      if (!usingFirebase) {
+        const data = loadLocal();
+        data[key] = value;
+        saveLocal(data);
+        return;
+      }
+      try {
+        await fetch(`${FIREBASE_URL}/reactions/${key}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(value)
+        });
+      } catch(e) {
+        const data = loadLocal();
+        data[key] = value;
+        saveLocal(data);
+      }
     }
 
-    let data = loadData();
-
-    function render(){
-      buttons.forEach(btn => {
-        const key = btn.getAttribute('data-key');
-        const entry = data[key] || { count: 0, picked: false };
-        btn.querySelector('.reaction-count').textContent = entry.count;
-        btn.classList.toggle('picked', !!entry.picked);
-      });
-    }
-    render();
+    // Load all counts on page open
+    (async function init(){
+      for (const key of keys) {
+        const val = await fetchCount(key);
+        setCount(key, val);
+      }
+    })();
 
     buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.getAttribute('data-key');
-        const entry = data[key] || { count: 0, picked: false };
-        entry.count += 1;
-        entry.picked = true;
-        data[key] = entry;
-        saveData(data);
-        render();
+      const key = btn.getAttribute('data-key');
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        const current = await fetchCount(key);
+        const next = current + 1;
+        await writeCount(key, next);
+        setCount(key, next);
+
+        picked[key] = true;
+        savePicked(picked);
+        setPickedStyle(key);
 
         const pop = btn.querySelector('.reaction-pop');
         pop.classList.remove('fly');
         void pop.offsetWidth; // restart animation
         pop.classList.add('fly');
+
+        btn.disabled = false;
       });
     });
   })();
