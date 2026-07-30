@@ -178,6 +178,7 @@
     background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:26px;
     display:flex; flex-direction:column; gap:14px; position:relative;
     transition:border-color 0.25s ease, transform 0.25s ease;
+    cursor: pointer;
   }
   .project-card:hover{ border-color:var(--trace); transform:translateY(-2px); }
   .project-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
@@ -194,7 +195,7 @@
   /* ---------- EXPERIENCE ---------- */
   .timeline{ position:relative; }
   .timeline::before{ content:''; position:absolute; left:7px; top:6px; bottom:6px; width:1px; background:var(--line); }
-  .tl-item{ position:relative; padding:0 0 34px 34px; }
+  .tl-item{ position:relative; padding:0 0 34px 34px; cursor:pointer; }
   .tl-item[data-gallery]{ cursor:pointer; border-radius:4px; transition:background 0.2s ease; }
   .tl-item[data-gallery]:hover, .tl-item[data-gallery]:focus-visible{ background:var(--panel); outline:none; }
   .tl-item[data-gallery]:hover .tl-photo-hint, .tl-item[data-gallery]:focus-visible .tl-photo-hint{ color:var(--trace-deep); }
@@ -469,63 +470,69 @@
 
     <div class="project-grid">
 
-      <div class="project-card reveal">
+      <!-- PRJ 1 -->
+      <div class="project-card reveal" data-gallery="prj-01" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-01 · ELZEN</span><span class="project-date">Nov – Dec 2025</span></div>
         <h3>Automated Home Entry/Exit Monitoring</h3>
         <span class="role">Hardware + Software</span>
         <p>A smart monitoring system for elderly individuals with cognitive conditions like dementia — detects entry/exit movement, tracks presence in real time, and alerts caregivers on abnormal behavior or prolonged absence. Built with Raspberry Pi, ultrasonic sensors, and an OLED display, plus an HTTP web interface for live status.</p>
         <div class="project-skills"><span>Python</span><span>Raspberry Pi</span><span>Video Editing</span></div>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
-      <div class="project-card reveal">
+      <!-- PRJ 2 -->
+      <div class="project-card reveal" data-gallery="prj-02" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-02 · HAEON</span><span class="project-date">Jul – Oct 2025</span></div>
         <h3>Alzheimer's Assistant Robot</h3>
         <span class="role">Software + Sensor Integration</span>
         <p>An assistive robotic system supporting individuals with Alzheimer's through daily assistance, memory support, and real-time safety monitoring. Exhibited at the Korea Electronics Show 2025.</p>
         <div class="project-skills"><span>Programming</span><span>Software Project Mgmt</span><span>Sensor Integration</span></div>
-        <a class="project-link" href="https://github.com/asnydnatsy/Alzheimer-Robot-Assistant" target="_blank" rel="noopener">View on GitHub →</a>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <a class="project-link" href="https://github.com/asnydnatsy/Alzheimer-Robot-Assistant" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
-      <div class="project-card reveal">
+      <!-- PRJ 3 -->
+      <div class="project-card reveal" data-gallery="prj-03" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-03 · CAPSTRICK</span><span class="project-date">Aug – Sep 2025</span></div>
         <h3>Smart Expiration Date Detection</h3>
         <span class="role">Web + Camera Sensing</span>
         <p>Uses a camera to detect and log product expiration dates automatically, then reminds users a day before expiry to cut food waste. Combines HTML-based web development with camera sensing and LED indicators for a practical smart-inventory tool.</p>
         <div class="project-skills"><span>HTML</span><span>LED Displays</span><span>Raspberry Pi</span></div>
-        <a class="project-link" href="https://github.com/asnydnatsy/Expiration-date-log" target="_blank" rel="noopener">View on GitHub →</a>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <a class="project-link" href="https://github.com/asnydnatsy/Expiration-date-log" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
-      <div class="project-card reveal">
+      <!-- PRJ 4 -->
+      <div class="project-card reveal" data-gallery="prj-04" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-04 · DRONE</span><span class="project-date">Feb – Jun 2025</span></div>
         <h3>Autonomous Obstacle Avoidance Drone</h3>
         <span class="role">Computer Vision + Flight Control</span>
         <p>Autonomous navigation for a DJI Tello drone using onboard sensors and a downward-facing camera to hold height, avoid obstacles, and land precisely with computer vision. Best Report Award at the IEEK IES Industrial Electronic Technology Fair 2025.</p>
         <div class="project-skills"><span>Python</span><span>Computer Vision</span><span>Embedded Systems</span></div>
-        <a class="project-link" href="https://github.com/asnydnatsy/Autonomous-Obstacle-Avoidance-Drone" target="_blank" rel="noopener">View on GitHub →</a>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <a class="project-link" href="https://github.com/asnydnatsy/Autonomous-Obstacle-Avoidance-Drone" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
-      <div class="project-card reveal">
+      <!-- PRJ 5 -->
+      <div class="project-card reveal" data-gallery="prj-05" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-05 · WALKER</span><span class="project-date">May – Jun 2025</span></div>
         <h3>Smart Baby Walker — Thesis</h3>
         <span class="role">System Design + Simulation</span>
         <p>A conceptual safety system that stops a baby walker's motor when an ultrasonic sensor detects a sudden distance change near an edge, such as stairs. Presented at the 5th National University Ignite Storytelling Competition; design and simulation only, no physical build.</p>
         <div class="project-skills"><span>Arduino</span><span>System Design</span><span>Simulation</span></div>
-        <a class="project-link" href="https://github.com/asnydnatsy/Smart-Baby-Walker" target="_blank" rel="noopener">View on GitHub →</a>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <a class="project-link" href="https://github.com/asnydnatsy/Smart-Baby-Walker" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
-      <div class="project-card reveal">
+      <!-- PRJ 6 -->
+      <div class="project-card reveal" data-gallery="prj-06" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-06 · SMART CAR</span><span class="project-date">Sep – Dec 2024</span></div>
         <h3>Autonomous Obstacle Avoidance Smart Car</h3>
         <span class="role">Sensor Fusion + Motor Control</span>
         <p>A smart car that detects and avoids obstacles in real time by combining ultrasonic and IR sensors with motor control logic — two build iterations, including a multi-sensor Arduino version with three ultrasonic and three IR sensors.</p>
         <div class="project-skills"><span>Arduino IDE</span><span>C</span><span>Sensor Fusion</span></div>
-        <a class="project-link" href="https://github.com/asnydnatsy/Autonomous-Obstacle-Avoidance" target="_blank" rel="noopener">View on GitHub →</a>
-        <span class="tl-photo-hint">📷 View photos</span></div>
+        <a class="project-link" href="https://github.com/asnydnatsy/Autonomous-Obstacle-Avoidance" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
     </div>
@@ -547,51 +554,46 @@
         <div class="tl-head"><h3>Multimedia &amp; Publication Bureau</h3><span class="tl-date">Nov 2025 – Present</span></div>
         <div class="tl-org">Persatuan Pelajar Malaysia Korea (PPMK)</div>
         <p>Design posters and visual content for events and announcements, manage social channels, and maintain the PPMK website — while coordinating with the team on large-scale student events.</p>
-      <span class="tl-photo-hint">📷 View photos</span>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
-      <div class="tl-item reveal" data-gallery="photographer" role="button" tabindex="0" aria-label="View photos for Freelance Photographer &amp; Videographer">
+      <div class="tl-item reveal" data-gallery="photographer" role="button" tabindex="0">
         <div class="tl-head"><h3>Freelance Photographer &amp; Videographer</h3><span class="tl-date">Nov 2025 – Present</span></div>
         <div class="tl-org">Personal</div>
         <p>Freelance Photographer and Videographer specializing in event photography and the production of corporate and event recap videos, from shooting to post-production editing.</p>
-      
       </div>
-      <div class="tl-item reveal" data-gallery="nurinarae" role="button" tabindex="0" aria-label="View photos for Member, Development Club">
+      <div class="tl-item reveal" data-gallery="nurinarae" role="button" tabindex="0">
         <div class="tl-head"><h3>Member, Development Club</h3><span class="tl-date">Feb 2025 – Dec 2025</span></div>
         <div class="tl-org">Nurinarae (누리나래) · Seoul, South Korea</div>
         <p>Competed in engineering fairs building real-world robotics, IoT, and assistive-tech solutions — including the obstacle-avoidance drone, the Alzheimer's assistant robot, and the smart baby walker thesis.</p>
-      <span class="tl-photo-hint">📷 View photos</span>
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
-      <div class="tl-item reveal" data-gallery="tourism-malaysia" role="button" tabindex="0" aria-label="View photos for Freelance Interpreter">
+      <div class="tl-item reveal" data-gallery="tourism-malaysia" role="button" tabindex="0">
         <div class="tl-head"><h3>Freelance Interpreter</h3><span class="tl-date">Jun 2025 – Aug 2025</span></div>
         <div class="tl-org">Tourism Malaysia · MATRADE</div>
         <p>Provided real-time Malay–Korean–English interpretation during a tourism event, and helped coordinate activities between organizers, exhibitors, and visitors.</p>
-      <span class="tl-photo-hint">📷 View photos</span> 
+        <span class="tl-photo-hint">📷 View photos</span> 
       </div>
-      <div class="tl-item reveal" data-gallery="tour-guide" role="button" tabindex="0" aria-label="View photos for Tour Guide">
+      <div class="tl-item reveal" data-gallery="tour-guide" role="button" tabindex="0">
         <div class="tl-head"><h3>Tour Guide</h3><span class="tl-date">Jun 2025 – Aug 2025</span></div>
         <div class="tl-org">Freelance · South Korea</div>
         <p>Guided Malaysian tourists across Seoul's major attractions, managing group logistics and cross-cultural communication in Malay and English.</p>
-      
       </div>
-      <div class="tl-item reveal" data-gallery="eid" role="button" tabindex="0" aria-label="View photos for Waitress">
+      <div class="tl-item reveal" data-gallery="eid" role="button" tabindex="0">
         <div class="tl-head"><h3>Waitress </h3><span class="tl-date">Aug 2025 – Present</span></div>
         <div class="tl-org">Eid · Seoul, South Korea</div>
         <p>Serves an international customer base at a busy halal Korean restaurant, using English and Korean to assist foreign diners during peak hours.</p>
-      
       </div>
-      <div class="tl-item reveal" data-gallery="oriental-beautea" role="button" tabindex="0" aria-label="View photos for Tearista">
+      <div class="tl-item reveal" data-gallery="oriental-beautea" role="button" tabindex="0">
         <div class="tl-head"><h3>Tearista</h3><span class="tl-date">Dec 2025 – Feb 2026</span></div>
         <div class="tl-org">Oriental BeuTea · Malaysia</div>
         <p>Prepared matcha and specialty tea beverages with consistent taste and presentation, applying precise preparation techniques in a fast-paced cafe.</p>
-      
       </div>
-      <div class="tl-item reveal" data-gallery="sf-coffee" role="button" tabindex="0" aria-label="View photos for Barista">
+      <div class="tl-item reveal" data-gallery="sf-coffee" role="button" tabindex="0">
         <div class="tl-head"><h3>Barista</h3><span class="tl-date">Dec 2024 – Feb 2025</span></div>
         <div class="tl-org">San Francisco Coffee · Malaysia</div>
         <p>Handled beverage prep, equipment operation, and POS transactions, building the ability to work under pressure and troubleshoot on the fly.</p>
-      
       </div>
-      <div class="tl-item reveal" data-gallery="jbm-coffee" role="button" tabindex="0" aria-label="View photos for Kitchen Crew">
+      <div class="tl-item reveal" data-gallery="jbm-coffee" role="button" tabindex="0">
         <div class="tl-head"><h3>Kitchen Crew</h3><span class="tl-date">Mar 2022 – Feb 2023</span></div>
         <div class="tl-org">Jamaica Blue Mountain Coffee · Malaysia</div>
         <p>Prepared menu items to consistent standards in a fast-paced kitchen, coordinating with the team through peak service hours.</p>
@@ -796,6 +798,7 @@
   </div>
 </section>
 
+<!-- THE GALLERY MODAL -->
 <div class="gallery-overlay" id="galleryOverlay">
   <div class="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
     <div class="gallery-modal-head">
@@ -806,7 +809,7 @@
       <div class="gallery-grid" id="galleryGrid"></div>
       <div class="gallery-empty" id="galleryEmpty">
         <strong>No photos yet</strong>
-        <span>Add images to <strong>images/experience/&lt;slug&gt;/</strong>, named 1.jpg, 2.jpg, 3.jpg…</span>
+        <span>Add images to <strong>images/experience/&lt;slug&gt;/</strong> or <strong>images/projects/&lt;slug&gt;/</strong></span>
       </div>
     </div>
   </div>
@@ -818,6 +821,7 @@
 </footer>
 
 <script>
+  // Mobile Nav Toggle
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('siteNav');
   toggle.addEventListener('click', () => {
@@ -831,6 +835,7 @@
     toggle.textContent = 'Menu';
   }));
 
+  // Reveal animations
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -846,7 +851,7 @@
     revealEls.forEach(el => el.classList.add('in'));
   }
 
-  // ---------- Experience photo gallery ----------
+  // ---------- Unified Gallery (Experience + Projects) ----------
   const galleryOverlay = document.getElementById('galleryOverlay');
   const galleryGrid = document.getElementById('galleryGrid');
   const galleryEmpty = document.getElementById('galleryEmpty');
@@ -864,6 +869,9 @@
     let settled = 0;
     let found = 0;
 
+    // Detect if the folder should be 'projects' or 'experience' based on slug
+    const folder = slug.startsWith('prj-') ? 'projects' : 'experience';
+
     for (let i = 1; i <= MAX_PHOTOS_PER_ITEM; i++) {
       const img = document.createElement('img');
       img.alt = `${title} — photo ${i}`;
@@ -877,7 +885,7 @@
         settled++; checkEmpty();
       };
       galleryGrid.appendChild(img);
-      img.src = `images/experience/${slug}/${i}.jpg`;
+      img.src = `images/${folder}/${slug}/${i}.jpg`;
     }
 
     function checkEmpty() {
@@ -892,7 +900,8 @@
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('.tl-item[data-gallery]').forEach(item => {
+  // Bind to BOTH timeline items and project cards
+  document.querySelectorAll('.tl-item[data-gallery], .project-card[data-gallery]').forEach(item => {
     const slug = item.getAttribute('data-gallery');
     const title = item.querySelector('h3').textContent.trim();
     item.addEventListener('click', () => openGallery(slug, title));
@@ -936,13 +945,10 @@
     }
   })();
 
-  // ---------- Reactions (shared count via Firebase Realtime Database) ----------
+  // ---------- Reactions ----------
   (function reactions(){
-    // TODO: paste your Firebase Realtime Database URL here, e.g.
-    // "https://natasya-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app"
     const FIREBASE_URL = "https://natasya-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app";
-
-    const PICKED_KEY = 'natasya-site-reactions-picked'; // which buttons *this* visitor has tapped (local only)
+    const PICKED_KEY = 'natasya-site-reactions-picked';
     const grid = document.getElementById('reactionGrid');
     if (!grid) return;
     const buttons = grid.querySelectorAll('.reaction-btn');
@@ -969,48 +975,26 @@
 
     const usingFirebase = !!FIREBASE_URL;
 
-    // Local-only fallback (used if no Firebase URL is set yet, or a request fails)
-    const LOCAL_FALLBACK_KEY = 'natasya-site-reactions-local';
-    function loadLocal(){
-      try { return JSON.parse(localStorage.getItem(LOCAL_FALLBACK_KEY)) || {}; }
-      catch(e) { return {}; }
-    }
-    function saveLocal(data){
-      try { localStorage.setItem(LOCAL_FALLBACK_KEY, JSON.stringify(data)); } catch(e){}
-    }
-
     async function fetchCount(key){
-      if (!usingFirebase) return (loadLocal()[key] || 0);
+      if (!usingFirebase) return 0;
       try {
         const res = await fetch(`${FIREBASE_URL}/reactions/${key}.json`);
         const val = await res.json();
         return typeof val === 'number' ? val : 0;
-      } catch(e) {
-        return (loadLocal()[key] || 0);
-      }
+      } catch(e) { return 0; }
     }
 
     async function writeCount(key, value){
-      if (!usingFirebase) {
-        const data = loadLocal();
-        data[key] = value;
-        saveLocal(data);
-        return;
-      }
+      if (!usingFirebase) return;
       try {
         await fetch(`${FIREBASE_URL}/reactions/${key}.json`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(value)
         });
-      } catch(e) {
-        const data = loadLocal();
-        data[key] = value;
-        saveLocal(data);
-      }
+      } catch(e) {}
     }
 
-    // Load all counts on page open
     (async function init(){
       for (const key of keys) {
         const val = await fetchCount(key);
@@ -1020,22 +1004,20 @@
 
     buttons.forEach(btn => {
       const key = btn.getAttribute('data-key');
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation(); // Don't trigger gallery
         btn.disabled = true;
         const current = await fetchCount(key);
         const next = current + 1;
         await writeCount(key, next);
         setCount(key, next);
-
         picked[key] = true;
         savePicked(picked);
         setPickedStyle(key);
-
         const pop = btn.querySelector('.reaction-pop');
         pop.classList.remove('fly');
-        void pop.offsetWidth; // restart animation
+        void pop.offsetWidth;
         pop.classList.add('fly');
-
         btn.disabled = false;
       });
     });
