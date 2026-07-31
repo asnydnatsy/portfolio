@@ -898,28 +898,24 @@
     document.body.style.overflow = '';
   }
 
-  // Bind timeline items -> images/experience/<slug>/
-  document.querySelectorAll('.tl-item[data-gallery]').forEach(item => {
-    const slug = item.getAttribute('data-gallery').trim();
+document
+  .querySelectorAll('.tl-item[data-gallery], .project-card[data-gallery]')
+  .forEach(item => {
+    const slug = item.getAttribute('data-gallery');
     const title = item.querySelector('h3').textContent.trim();
-    item.addEventListener('click', () => openGallery(slug, title, 'experience'));
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openGallery(slug, title, 'experience');
-      }
-    });
-  });
 
-  // Bind project cards -> images/projects/<slug>/
-  document.querySelectorAll('.project-card[data-gallery]').forEach(item => {
-    const slug = item.getAttribute('data-gallery').trim();
-    const title = item.querySelector('h3').textContent.trim();
-    item.addEventListener('click', () => openGallery(slug, title, 'projects'));
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openGallery(slug, title, 'projects');
+    const folder = item.classList.contains('project-card')
+      ? 'projects'
+      : 'experience';
+
+    item.addEventListener('click', () => {
+      openGallery(slug, title, folder);
+    });
+
+    item.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openGallery(slug, title, folder);
       }
     });
   });
