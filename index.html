@@ -389,7 +389,7 @@
     <div class="hero-grid">
       <div>
         <div class="eyebrow reveal">EEE Student · JPA Scholar</div>
-        <h1 class="reveal">Coding circuits, <span>capturing stories</span>, <span>and building what’s next.</h1>
+        <h1 class="reveal">Coding circuits, <span>capturing stories</span>, <span>and building what's next.</h1>
         <p class="hero-role reveal">3rd-Year Electrical &amp; Electronics Engineering, Konkuk University · Diploma in Information &amp; Electronic Engineering, Dongyang Mirae University</p>
         <p class="hero-desc reveal">I'm Natasya — I build real-world projects with sensors and microcontrollers, from smart monitoring systems to assistive robotics. Currently deepening my skills in embedded programming, control systems, and semiconductors, and actively looking for an internship in  AI, embedded systems, electronics, or IoT.</p>
         <div class="hero-actions reveal">
@@ -515,14 +515,14 @@
       </div>
 
       <!-- PRJ 5 -->
-      <div class="project-card reveal" data-gallery=" " role="button" tabindex="0">
+      <div class="project-card reveal" data-gallery="walker" role="button" tabindex="0">
         <div class="project-top"><span class="project-id">PRJ-05 · WALKER</span><span class="project-date">May – Jun 2025</span></div>
         <h3>Smart Baby Walker — Thesis</h3>
         <span class="role">System Design + Simulation</span>
         <p>A conceptual safety system that stops a baby walker's motor when an ultrasonic sensor detects a sudden distance change near an edge, such as stairs. Presented at the 5th National University Ignite Storytelling Competition; design and simulation only, no physical build.</p>
         <div class="project-skills"><span>Arduino</span><span>System Design</span><span>Simulation</span></div>
         <a class="project-link" href="https://github.com/asnydnatsy/Smart-Baby-Walker" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>
-       
+        <span class="tl-photo-hint">📷 View photos</span>
       </div>
 
       <!-- PRJ 6 -->
@@ -860,7 +860,7 @@
   const galleryClose = document.getElementById('galleryClose');
   const MAX_PHOTOS_PER_ITEM = 8;
 
-  function openGallery(slug, title) {
+  function openGallery(slug, title, folder) {
     galleryTitle.textContent = title;
     galleryGrid.innerHTML = '';
     galleryEmpty.style.display = 'none';
@@ -869,9 +869,6 @@
 
     let settled = 0;
     let found = 0;
-
-    // Detect if the folder should be 'projects' or 'experience' based on slug
-    const folder = slug.startsWith('prj-') ? 'projects' : 'experience';
 
     for (let i = 1; i <= MAX_PHOTOS_PER_ITEM; i++) {
       const img = document.createElement('img');
@@ -901,15 +898,28 @@
     document.body.style.overflow = '';
   }
 
-  // Bind to BOTH timeline items and project cards
-  document.querySelectorAll('.tl-item[data-gallery], .project-card[data-gallery]').forEach(item => {
-    const slug = item.getAttribute('data-gallery');
+  // Bind timeline items -> images/experience/<slug>/
+  document.querySelectorAll('.tl-item[data-gallery]').forEach(item => {
+    const slug = item.getAttribute('data-gallery').trim();
     const title = item.querySelector('h3').textContent.trim();
-    item.addEventListener('click', () => openGallery(slug, title));
+    item.addEventListener('click', () => openGallery(slug, title, 'experience'));
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        openGallery(slug, title);
+        openGallery(slug, title, 'experience');
+      }
+    });
+  });
+
+  // Bind project cards -> images/projects/<slug>/
+  document.querySelectorAll('.project-card[data-gallery]').forEach(item => {
+    const slug = item.getAttribute('data-gallery').trim();
+    const title = item.querySelector('h3').textContent.trim();
+    item.addEventListener('click', () => openGallery(slug, title, 'projects'));
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openGallery(slug, title, 'projects');
       }
     });
   });
